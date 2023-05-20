@@ -1,13 +1,36 @@
 import React from "react";
+import UpdateList from "./UpdateList";
+import DeleteList from "./DeleteList";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Lists(props) {
     let listrows = [];
-    props.alldata.forEach(j => {
+    props.alldata.forEach(element => {
         listrows.push(
-            <tr key={j.id}>
-                <td>{j.id}</td>
-                <td>{j.title}</td>
-                <td>{j.author}</td>z
+            <tr key={element.id}>
+                <td>{element.id}</td>
+                <td>{element.title}</td>
+                <td>{element.author}</td>
+                <td>
+                    <UpdateList
+                        elementId={element.id}
+                        singledata={props.singledata}
+                        getList={props.getList}
+                        updateList={props.updateList}
+                        handleChange={props.handleChange}
+                    >
+                    </UpdateList>
+                </td>
+                <td>
+                    <DeleteList
+                        elementId={element.id}
+                        singledata={props.singledata}
+                        getList={props.getList}
+                        deleteList={props.deleteList}
+                        //handleChange={props.handleChange}
+                    >
+                    </DeleteList>
+                </td>
             </tr>
         );
     })
@@ -22,9 +45,7 @@ function Lists(props) {
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody>
-                {listrows}
-            </tbody>
+            <tbody>{listrows}</tbody>
         </table>
     )
 }
